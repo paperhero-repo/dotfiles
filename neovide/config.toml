@@ -1,0 +1,4 @@
+frame = "buttonless"
+title-hidden = true
+srbg = true
+vsync = true
