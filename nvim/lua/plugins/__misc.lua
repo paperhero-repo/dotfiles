@@ -12,10 +12,6 @@ return {
 		"tpope/vim-rhubarb",
 	},
 	{
-		-- Hints keybinds
-		"folke/which-key.nvim",
-	},
-	{
 		-- Autoclose parentheses, brackets, quotes, etc.
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -42,7 +38,11 @@ return {
 		priority = 1000,
 		config = function()
 			require("kanagawa-paper").setup({})
-			vim.cmd.colorscheme("kanagawa-paper-ink")
+			vim.cmd.colorscheme("kanagawa-paper")
 		end,
+	},
+	{
+		"folke/which-key.nvim",
+		-- lua/core/keymap.lua  에 setup 코드가 있음
 	},
 }

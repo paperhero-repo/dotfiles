@@ -89,4 +89,22 @@ function M.make_map(prefix, buf)
 	end
 	return map
 end
+
+function M.get_icon_by_name(name)
+	local result = {
+		error = "E",
+		warn = "W",
+		info = "I",
+		hint = "H",
+		modi = "+",
+		buffer = "",
+		git_added = "A",
+		git_modified = "M",
+		git_removed = "R",
+	}
+	return result[name] or "NFI"
+end
+
+function M.project_create(name) end
+
 return M

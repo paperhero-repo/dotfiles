@@ -56,11 +56,11 @@ function M.setup()
 	vim.api.nvim_set_hl(0, "TelescopePromptNormal", { link = "NormalFloat" })
 	vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { link = "NormalFloat" })
 
-	vim.api.nvim_set_hl(0, "TelescopeTitle", { link = "NormalFloat" })
-	vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { link = "NormalFloat" })
-	vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { link = "NormalFloat" })
+	vim.api.nvim_set_hl(0, "TelescopeTitle", { link = "Special" })
+	vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { link = "Special" })
+	vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { link = "Special" })
 
-	vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "CursorLineAlt" })
+	vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "Visual" })
 end
 
 return M

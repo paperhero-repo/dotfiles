@@ -52,10 +52,13 @@ function M.setup()
 
 		-- 창 스타일 설정
 		window = {
-			completion = cmp.config.window.bordered(),
+			completion = cmp.config.window.bordered({
+				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+			}),
 			documentation = {
 				max_width = 40,
 				border = "rounded",
+				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder", -- 문서 창도 동일 스타일
 			},
 		},
 
@@ -103,6 +106,8 @@ function M.setup()
 					buffer = "[버퍼]",
 					path = "[경로]",
 				})[entry.source.name]
+
+				vim_item.menu_hl_group = "Special" -- 원하는 하이라이트 그룹
 				return vim_item
 			end,
 		},

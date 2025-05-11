@@ -8,6 +8,8 @@ return {
 		"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		{
 			"s1n7ax/nvim-window-picker",
+			name = "window-picker",
+			event = "VeryLazy",
 			version = "2.*",
 			config = function()
 				require("window-picker").setup({
@@ -28,10 +30,5 @@ return {
 	},
 	config = function()
 		require("configs.__neotree").setup()
-
-		local map = require("core.utils").make_map("Tree:")
-		vim.cmd([[nnoremap \ :Neotree reveal<cr>]]) -- \ 키로 트리 토글
-		map("<leader>e", ":Neotree toggle<CR>", "트리 토글") -- 리더+e로 트리 열기/닫기
-		map("<leader>ngs", ":Neotree float git_status<CR>", "Git 상태창 열기") -- Git 상태 표시
 	end,
 }

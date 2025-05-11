@@ -25,13 +25,15 @@ function M.setup()
 			},
 			git_status = {
 				symbols = {
-					added = "", -- 추가된 파일 (기본 색상 사용)
-					modified = "", -- 수정된 파일
-					deleted = "✖", -- 삭제된 파일
-					renamed = "󰁕", -- 이름 변경된 파일
-					untracked = "", -- 추적되지 않은 파일
-					ignored = "", -- 무시된 파일
-					conflict = "", -- 충돌 상태 파일
+					added = "A", -- Added (추가됨)
+					modified = "M", -- Modified (수정됨)
+					deleted = "D", -- Deleted (삭제됨)
+					renamed = "R", -- Renamed (이름 변경됨)
+					untracked = "?", -- Untracked (추적되지 않음)
+					ignored = "!", -- Ignored (무시됨)
+					unstaged = "U", -- Unstaged (스테이징 안 됨)
+					staged = "S", -- Staged (스테이징 됨)
+					conflict = "C", -- Conflict (충돌 상태)
 				},
 			},
 		},
@@ -126,7 +128,7 @@ function M.setup()
 	})
 
 	vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { link = "FloatBorder" })
-	vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { link = "FloatNormal" })
+	vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { link = "Special" })
 end
 
 return M

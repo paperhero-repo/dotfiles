@@ -1,9 +1,7 @@
 -- 기본 설정 로드
 require("core.options").setup()
 require("core.neovide-options").setup()
-require("core.keymaps").setup()
 
--- Set up the Lazy plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 ---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -17,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- 플러그인 관리자 초기화
 require("lazy").setup({
+	require("plugins.__misc"),
 	require("plugins.__cmp"),
 	require("plugins.__telescope"),
 	require("plugins.__lspconfig"),
@@ -26,11 +25,11 @@ require("lazy").setup({
 	require("plugins.__gitsigns"),
 	require("plugins.__none-ls"),
 	require("plugins.__neotree"),
-	require("plugins.__misc"),
 	require("plugins.__trouble"),
-	require("plugins.__noice"),
 	require("plugins.__lualine"),
 	require("plugins.__comment"),
+	require("plugins.__noice"),
 })
 
 require("core.snippets").setup()
+require("core.keymaps").setup()
