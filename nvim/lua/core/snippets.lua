@@ -61,6 +61,35 @@ function M.setup()
 			vim.cmd("bdelete!")
 		end
 	end, { desc = "버퍼 닫기" })
+
+	vim.api.nvim_create_user_command("SetProjectRoot", function()
+		local path = utils.detect_project_root()
+
+		if not path then
+			vim.notify("프로젝트 루트를 찾을 수 없습니다 ", vim.log.lelves.ERROR)
+			return
+		end
+
+		local choice =
+			vim.fn.confirm("프로젝트 루트를 다음으로 설정하시겠습니까?\n" .. path, "&Yes\n&No", 2)
+
+		if choice == 1 then
+			vim.api.nvim_set_current_dir(path)
+			vim.notify("설정완료: " .. path, vim.log.levels.INFO)
+		else
+			vim.notify("취소되었습니다.", vim.log.levels.WARN)
+		end
+	end, {})
+
+	vim.api.nvim_create_autocmd("VimEnter", {
+		pattern = "*",
+		callback = function()
+			if vim.fn.argc() == 0 then
+				local path = "~/Works/"
+				vim.api.nvim_set_current_dir(path)
+			end
+		end,
+	})
 end
 
 return M

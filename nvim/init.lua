@@ -25,7 +25,6 @@ require("lazy").setup({
 	require("plugins.__gitsigns"),
 	require("plugins.__none-ls"),
 	require("plugins.__neotree"),
-	require("plugins.__trouble"),
 	require("plugins.__lualine"),
 	require("plugins.__comment"),
 	require("plugins.__noice"),

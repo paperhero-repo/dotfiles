@@ -45,51 +45,6 @@ function M.detect_project_root()
 	return find_root(vim.fn.fnamemodify(current_file, ":h")) or vim.fn.getcwd()
 end
 
---- 윈도우 크기 조정
--- 화면 크기에 맞게 동적 크기 조정
--- @param size number 원하는 크기
--- @return number 조정된 크기
-function M.set_size(size)
-	local screen_height = vim.api.nvim_win_get_height(0)
-	-- 화면 여유 공간 고려 (10줄 이상 여유 있을 때만 원하는 크기 사용)
-	if screen_height > size + 10 then
-		return size
-	else
-		return screen_height -- 화면 크기에 맞춤
-	end
-end
-
---- 현재 윈도우 화면 크기 조회
--- @return table {width: number, height: number} 형태의 크기 정보
-function M.get_screen_size()
-	return {
-		width = vim.api.nvim_win_get_width(0) or 0,
-		height = vim.api.nvim_win_get_height(0) or 0,
-	}
-end
-
---- 키맵 생성 헬퍼 함수
--- @param prefix string 키맵 설명 접두사
--- @param buf number 버퍼 번호 (nil일 경우 글로벌 키맵)
--- @return function(map_keys: string, func: function, desc: string, mode?: string)
-function M.make_map(prefix, buf)
-	--- 내부 키맵 설정 함수
-	-- @param keys string 키 조합
-	-- @param func function 매핑될 함수
-	-- @param desc string 키맵 설명
-	-- @param mode string 모드 (기본값: "n")
-	local function map(keys, func, desc, mode)
-		mode = mode or "n"
-		vim.keymap.set(mode, keys, func, {
-			buffer = buf,
-			desc = prefix .. desc, -- 접두사 + 설명 조합
-			noremap = true,
-			silent = true,
-		})
-	end
-	return map
-end
-
 function M.get_icon_by_name(name)
 	local result = {
 		error = "E",
@@ -104,7 +59,5 @@ function M.get_icon_by_name(name)
 	}
 	return result[name] or "NFI"
 end
-
-function M.project_create(name) end
 
 return M

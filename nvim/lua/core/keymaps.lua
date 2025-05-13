@@ -37,20 +37,28 @@ function M.setup()
 	map("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", { desc = "지금 라인 코멘트" })
 	map("x", "<leader>/", "<Plug>(comment_toggle_blockwise_visual)", { desc = "선택 라인 코멘트" })
 
-	-- 진단(Diagnostics) 관리 --
-	----------------------------
 	local diag = require("vim.diagnostic")
 	local function jump_diagnostic(count)
 		diag.jump({ count = count, float = false })
 	end
 
-	map("n", "t[", function()
+	map("n", "<leader>tp", function()
 		jump_diagnostic(-1)
 	end, { desc = "이전 진단 이동" })
-	map("n", "t]", function()
+	map("n", "<leader>tn", function()
 		jump_diagnostic(1)
 	end, { desc = "다음 진단 이동" })
-	map("n", "<leader>td", diag.open_float, { desc = "진단 메시지 표시" })
+
+	map("n", "<leader>tl", function()
+		diag.open_float({
+			scope = "line", -- 커서 위치 라인 기준
+			border = "rounded",
+			prefix = function(d)
+				return string.format("(%d) ", d.severity)
+			end,
+		})
+	end, { desc = "진단 메시지 표시" })
+
 	map("n", "<leader>tq", diag.setloclist, { desc = "로케이션리스트에 진단 표시" })
 
 	-- Neovide GUI 설정 --
@@ -149,7 +157,7 @@ function M.setup()
 			map("n", "<leader>cr", function()
 				telescope_builtin.lsp_references({
 					include_declaration = false, -- 선언부 제외 (선택 사항)
-					show_line = true, -- 코드 라인 표시
+					show_line = true,        -- 코드 라인 표시
 					path_display = { "shorten" }, -- 파일 경로 축약 표시
 				})
 			end, { desc = "참조 검색", buffer = buf })
@@ -193,6 +201,8 @@ function M.setup()
 		vim.api.nvim_buf_delete(buf, { force = true })
 	end, { desc = "현재 버퍼 닫기" })
 
+	map("n", "<leader>pr", "<cmd>SetProjectRoot <cr>", { desc = "루트찾기" })
+
 	require("which-key").setup({
 		preset = "helix",
 		delay = 0,
@@ -202,11 +212,12 @@ function M.setup()
 		},
 		sort = { "alphanum" },
 		spec = {
-			{ "<leader>t", group = "문제/진단(Trouble)" },
+			{ "<leader>t", group = "문제/진단" },
 			{ "<leader>g", group = "Git" },
 			{ "<leader>s", group = "검색" },
 			{ "<leader>c", group = "코드" },
 			{ "<leader>b", group = "버퍼" },
+			{ "<leader>p", group = "프로젝트" },
 		},
 	})
 end
