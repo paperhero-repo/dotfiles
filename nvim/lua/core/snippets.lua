@@ -81,6 +81,18 @@ function M.setup()
 		end
 	end, {})
 
+	vim.api.nvim_create_user_command("GetTerminalPath", function()
+		local handle = io.popen("pwd")
+		if handle ~= nil then
+			local path = handle:read("*a"):gsub("\n", "")
+			handle:close()
+
+			print(path)
+			return
+		end
+		print("Not Found Handle")
+	end, {})
+
 	vim.api.nvim_create_autocmd("VimEnter", {
 		pattern = "*",
 		callback = function()
@@ -90,6 +102,23 @@ function M.setup()
 			end
 		end,
 	})
+
+	vim.api.nvim_create_user_command("SyncTerminalCwd", function()
+		local jobid = vim.b.terminal_job_id
+		if jobid == nil then
+			vim.notify("버퍼가 터미널이여야 합니다.", vim.log.levels.ERROR)
+			return
+		end
+		local os_name = vim.loop.os_uname().sysname
+
+		local pid = vim.fn.jobpid(jobid)
+		local cmd = os_name == "Darwin" and "lsof -p %d | grep cwd | awk '{print $9}'" or "readlink -f /proc/%d/cwd"
+		local cwd = vim.fn.system(string.format(cmd, pid)):gsub("\n", "")
+
+		vim.api.nvim_set_current_dir(cwd)
+
+		vim.notify("루트변경: " .. cwd, vim.log.levels.INFO)
+	end, {})
 end
 
 return M

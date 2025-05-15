@@ -1,0 +1,105 @@
+# .amethyst.yml
+
+layouts:
+  - tall
+  - fullscreen
+  - wide
+  - column
+
+# Modifier 설정
+mod1:
+  - option
+
+mod2:
+  - option
+  - shift
+
+# 포커스 이동 (h=좌, l=우)
+focus-ccw:
+  mod: mod1
+  key: h
+
+focus-cw:
+  mod: mod1
+  key: l
+
+# 화면 간 포커스 이동 ([=좌, ]=우)
+focus-screen-ccw:
+  mod: mod1
+  key: "["
+focus-screen-cw:
+  mod: mod1
+  key: "]"
+
+# 창 위치 이동 (<=좌, >=우)
+swap-ccw:
+  mod: mod1
+  key: ","
+swap-cw:
+  mod: mod1
+  key: "."
+
+# 화면 간 창 이동 (mod2+<=좌, mod2+>=우)
+swap-screen-ccw:
+  mod: mod2
+  key: ","
+swap-screen-cw:
+  mod: mod2
+  key: "."
+
+# 창 크기 조절 (h=축소, l=확대)
+shrink-main:
+  mod: mod2
+  key: h
+expand-main:
+  mod: mod2
+  key: l
+
+# 기존 설정 유지 (아래 부분은 변경되지 않은 설정입니다)
+cycle-layout:
+  mod: mod1
+  key: space
+
+cycle-layout-backward:
+  mod: mod2
+  key: space
+
+increase-main:
+  mod: mod1
+  key: "u" # 기존 ','에서 변경
+decrease-main:
+  mod: mod1
+  key: "i" # 기존 '.'에서 변경
+
+focus-main:
+  mod: mod1
+  key: m
+
+swap-main:
+  mod: mod1
+  key: enter
+
+toggle-float:
+  mod: mod1
+  key: t
+
+display-current-layout:
+  mod: mod1
+  key: i
+
+toggle-tiling:
+  mod: mod2
+  key: t
+
+reevaluate-windows:
+  mod: mod1
+  key: z
+
+toggle-focus-follows-mouse:
+  mod: mod2
+  key: x
+
+relaunch-amethyst:
+  mod: mod2
+  key: z
+# ... (나머지 설정은 원본 유지)
