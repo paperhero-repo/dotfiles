@@ -36,24 +36,17 @@ function M.setup()
 		callback = function()
 			vim.highlight.on_yank({
 				higroup = "IncSearch", -- 사용할 하이라이트 그룹
-				timeout = 300, -- 300ms 동안 유지
+				timeout = 200,     -- 300ms 동안 유지
 			})
 		end,
 		group = highlight_group,
 		pattern = "*",
 	})
 
-	local colors = require("kanagawa-paper.colors").setup({ _theme = "ink" })
-	local theme = colors.theme
-	local visual_bg = theme.ui.bg_cursorline_alt
-	local cursorline_bg = theme.ui.bg_cursorline
-	--[[ vim.api.nvim_set_hl(0, "Visual", { bg = cursorline_bg })
-	vim.api.nvim_set_hl(0, "CursorLine", { bg = visual_bg }) ]]
-
 	vim.keymap.set("n", "<leader>x", function()
 		if vim.bo.modified then
 			local choice =
-				vim.fn.confirm("저장하지 않은 변경사항이 있습니다. 닫을까요?", "&Yes\n&No", 2)
+					vim.fn.confirm("저장하지 않은 변경사항이 있습니다. 닫을까요?", "&Yes\n&No", 2)
 			if choice == 1 then
 				vim.cmd("bdelete!")
 			end
@@ -71,7 +64,7 @@ function M.setup()
 		end
 
 		local choice =
-			vim.fn.confirm("프로젝트 루트를 다음으로 설정하시겠습니까?\n" .. path, "&Yes\n&No", 2)
+				vim.fn.confirm("프로젝트 루트를 다음으로 설정하시겠습니까?\n" .. path, "&Yes\n&No", 2)
 
 		if choice == 1 then
 			vim.api.nvim_set_current_dir(path)

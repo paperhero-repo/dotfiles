@@ -11,14 +11,14 @@ function M.detect_project_root()
 
 	-- 프로젝트 마커 목록 (확장 가능)
 	local markers = {
-		".git", -- Git 저장소
-		"go.mod", -- Go 프로젝트
-		"pubspec.yaml", -- Flutter 프로젝트
-		"package.json", -- Node.js/SvelteKit 프로젝트
+		".git",           -- Git 저장소
+		"go.mod",         -- Go 프로젝트
+		"pubspec.yaml",   -- Flutter 프로젝트
+		"package.json",   -- Node.js/SvelteKit 프로젝트
 		"svelte.config.js", -- Svelte 프로젝트
-		"Cargo.toml", -- Rust 프로젝트
+		"Cargo.toml",     -- Rust 프로젝트
 		"CMakeLists.txt", -- C/C++ 프로젝트
-		"mix.exs", -- Elixir 프로젝트
+		"mix.exs",        -- Elixir 프로젝트
 		"pyproject.toml", -- Python 프로젝트
 	}
 
@@ -46,18 +46,23 @@ function M.detect_project_root()
 end
 
 function M.get_icon_by_name(name)
-	local result = {
-		error = "E",
-		warn = "W",
-		info = "I",
-		hint = "H",
+	local icons = {
+		-- LSP 진단 아이콘 (Nerd Font)
+		error = " ",
+		warn = " ",
+		info = " ",
+		hint = " ",
+
+		-- 버퍼 수정 상태 아이콘
 		modi = "+",
-		buffer = "",
-		git_added = "A",
-		git_modified = "M",
-		git_removed = "R",
+
+		-- Git 상태 아이콘 (Nerd Font)
+		git_added = " ",
+		git_modified = " ",
+		git_removed = " ",
 	}
-	return result[name] or "NFI"
+
+	return icons[name] or "?"
 end
 
 return M

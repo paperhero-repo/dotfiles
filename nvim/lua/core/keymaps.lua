@@ -74,8 +74,8 @@ function M.setup()
 		map("n", "<D-->", scale_gui(1 / 1.2))
 	end
 
-	-- 모드(mode) 매개변수 추가 및 옵션 테이블 정리
-	map("n", "<leader>f", ":Neotree toggle<CR>", { desc = "트리 토글" })
+	-- 파일 탐색기
+	map("n", "<leader>f", require("nvim-tree.api").tree.toggle, { desc = "트리 토글" })
 
 	local telescope_builtin = require("telescope.builtin")
 	-- Telescope 기능
@@ -179,7 +179,7 @@ function M.setup()
 	map("n", "<leader>bt", function()
 		vim.cmd.enew()
 		vim.cmd.terminal()
-
+		-- vim.cmd("tabnew | terminal")
 		vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = true })
 	end, { desc = "터미널" })
 
